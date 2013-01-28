@@ -1,0 +1,2 @@
+require_relative 'initialization/initialization_macro'
+require_relative 'initialization/initialization'
