@@ -3,8 +3,8 @@ lib = File.expand_path('../lib/', __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
-  s.name = 'initialization'
-  s.summary = 'Initialization Library'
+  s.name = 'initializer'
+  s.summary = 'Initializer Library'
   s.version = '0.0.0'
   s.authors = 'We made this'
   s.require_paths = ['lib']
