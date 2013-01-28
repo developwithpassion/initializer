@@ -1,4 +1,4 @@
-module Initialization
+module Initializer
   def self.included(base)
     base.extend ClassMethods
   end

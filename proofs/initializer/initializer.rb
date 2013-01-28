@@ -3,7 +3,7 @@ require_relative '../proofs_init'
 title 'Including the intialization module'
 
 class SomeItem
-  include Initialization
+  include Initializer
 end
 
 proof 'Including the module provides the class with access to the initialize_with macro' do
@@ -11,7 +11,7 @@ proof 'Including the module provides the class with access to the initialize_wit
 end
 
 class SomeItemThatUsesTheInitializer
-  include Initialization
+  include Initializer
 
   initialize_with :name, :age, :address
 end

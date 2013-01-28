@@ -6,7 +6,7 @@ class Item
   attr_accessor :name,:age
 end
 
-module Initialization
+module Initializer
   class InitializationMacro
     module Proof
       def initializes_variables_on_creation?
@@ -23,7 +23,7 @@ end
 
 
 def initializer
-  Initialization::InitializationMacro.new Item, :name,:age
+  Initializer::InitializationMacro.new Item, :name,:age
 end
 
 proof 'Initializes variables automatically' do

@@ -1,29 +1,29 @@
-initialization
+initializer
 ======
 
-`initialization` gem enables a simple declaritive initializer model
+`initializer` gem enables a simple declaritive initializer model
 
 ## Installation
 
 Install the gem itself.
 
-    [PROJECTS]$ git clone ssh://git@$REPOSITORY_PATH/initialization.git
-    [PROJECTS]$ cd initialization
-    [PROJECTS/initialization]$ gem install bundler
-    [PROJECTS/initialization]$ gem install path_gem
-    [PROJECTS/initialization]$ bundle
+    [PROJECTS]$ git clone ssh://git@$REPOSITORY_PATH/initializer.git
+    [PROJECTS]$ cd initializer
+    [PROJECTS/initializer]$ gem install bundler
+    [PROJECTS/initializer]$ gem install path_gem
+    [PROJECTS/initializer]$ bundle
 
 Make the gem available for `path-gem`.
 
     cd $PATH_GEM_DIR
-    [PATH_GEM_DIR]$ ln -s $PROJECTS/initialization initialization
+    [PATH_GEM_DIR]$ ln -s $PROJECTS/initializer initializer
 
 ## Usage
 
-### include initialization and use the initialize_with macro to define the ctor and automatic initialization
+### include initializer and use the initialize_with macro to define the ctor and automatic initializer
 ```ruby
 class SomeItem
-  include Initialization
+  include initializer
 
   initialize_with :name, :age, :address
 end

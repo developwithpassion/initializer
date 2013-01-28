@@ -1,4 +1,4 @@
-module Initialization
+module Initializer
   class InitializationMacro
     attr_reader :target_class
     attr_reader :ctor_parameter_names
