@@ -6,19 +6,32 @@ class SomeItem
   include Initializer
 end
 
-proof 'Including the module provides the class with access to the initialize_with macro' do
-  SomeItem.prove { respond_to? :initialize_with }
+proof 'Including the initializer module provides the class with access to the initializer macro' do
+  SomeItem.prove { respond_to? :initializer }
 end
 
 class SomeItemThatUsesTheInitializer
   include Initializer
 
-  initialize_with :name, :age, :address
+  initializer :name, :age, :address
+
+  module Proof
+    def ctor_generated_correctly?(name, age, address)
+      @name == name && 
+      @age == age &&
+      @address == address
+    end
+  end
 end
 
 heading 'Using the initialization macro'
 
-proof 'Generates the appropriate ctor on the target type' do
-    item = SomeItemThatUsesTheInitializer.new('John', 33, 'Some House')
-    item.prove { !nil? }
+proof 'Leveraging the initializer generates a ctor on the target type with the right ctor args and automatic initialization' do
+  name = 'John'
+  age = '33'
+  address = 'Some House'
+
+  item = SomeItemThatUsesTheInitializer.new(name, age, address)
+
+  item.prove { ctor_generated_correctly?(name, age, address) }
 end

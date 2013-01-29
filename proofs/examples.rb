@@ -1,0 +1,3 @@
+require_relative 'examples/inline_simple_ctor_generation'
+require_relative 'examples/block_simple_ctor_generation'
+require_relative 'examples/block_with_custom_initialization'
