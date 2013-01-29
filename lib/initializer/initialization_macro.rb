@@ -15,11 +15,9 @@ module Initializer
     end
 
 
-    def param(name, &parameter_configuration_block)
-      parameter = Parameter.new name
-      parameter.instance_eval &parameter_configuration_block if block_given?
-      parameters[name] = parameter
-      self
+    def configure_parameter(parameter, add_to_all_parameters = true)
+      parameters[parameter.name] = parameter if add_to_all_parameters
+      parameter
     end
 
     def extra_initialization(&initialization_block)
@@ -31,26 +29,30 @@ module Initializer
     end
 
 
+    def param(name)
+      param = Parameter.build_regular_parameter name
+      configure_parameter(param)
+      param
+    end
+
     def splat_param(name, &parameter_configuration_block)
       raise 'Only one splat parameter can be defined for a ctor' unless splat_parameter.nil?
-      splat_parameter = SplatParameter.new(name)
-      splat_parameter.instance_eval &parameter_configuration_block if block_given?
-      self.splat_parameter = splat_parameter
-      self
+      param = Parameter.build_splat_parameter name
+      self.splat_parameter = configure_parameter(param, false,  &parameter_configuration_block)
+      param
     end
 
     def block_param(name, &parameter_configuration_block)
       raise 'Only one block parameter can be defined for a ctor' unless block_parameter.nil?
-      block_parameter = BlockParameter.new(name)
-      block_parameter.instance_eval &parameter_configuration_block if block_given?
-      self.block_parameter = block_parameter
-      self
+      param = Parameter.build_block_parameter(name)
+      self.block_parameter = configure_parameter(param, false, &parameter_configuration_block)
+      param
     end
 
     def complete_parameter_list
       all_parameters = parameters.values.dup.to_a
-      all_parameters << splat_parameter.method_parameter_name unless splat_parameter.nil?
-      all_parameters << block_parameter.method_parameter_name unless block_parameter.nil?
+      all_parameters << splat_parameter unless splat_parameter.nil?
+      all_parameters << block_parameter unless block_parameter.nil?
       all_parameters
     end
 
@@ -67,11 +69,10 @@ module Initializer
     end
 
     def build_ctor_definition
-      body = <<CTOR
+      body = 
+<<CTOR
         def initialize(#{parameter_declaration_statement})
-          
           #{variable_assignment_statements}   
-
           run_custom_initialization
         end
 CTOR

@@ -48,13 +48,6 @@ module Initializer
         target_class == target
       end
 
-      def configured_parameter?(name)
-        configured = false
-        param name do
-          configured = true
-        end
-        configured
-      end
 
       def can_only_have_one_splat_parameter?(name)
         had_no_splat_param = splat_parameter.nil?
@@ -96,10 +89,6 @@ proof 'An initialization macro should maintain a list of its own parameter defin
   macro.prove { stored_parameter? :name }
 end
 
-proof 'An initialization macro should configure a new parameter using the parameter configuration block' do
-  macro = Initializer::InitializationMacro.new Item
-  macro.prove { configured_parameter? :name }
-end
 
 proof 'An initialization macro should only be able to have a singular splat parameter defined' do
   macro = Initializer::InitializationMacro.new Item
