@@ -13,10 +13,6 @@ module Initializer
     end
 
 
-    def add_parameter_to_all_parameters(parameter)
-      parameters[parameter.name] = parameter 
-    end
-
     def extra_initialization(&initialization_block)
       @extra_initialization_block = initialization_block
     end
@@ -28,7 +24,7 @@ module Initializer
 
     def param(name)
       param = Parameter.build_regular_parameter name
-      add_parameter_to_all_parameters(param)
+      parameters[param.name] = param
       param
     end
 
@@ -48,8 +44,8 @@ module Initializer
 
     def complete_parameter_list
       all_parameters = parameters.values.dup.to_a
-      all_parameters << splat_parameter unless splat_parameter.nil?
-      all_parameters << block_parameter unless block_parameter.nil?
+      all_parameters << splat_parameter if splat_parameter
+      all_parameters << block_parameter if block_parameter
       all_parameters
     end
 
@@ -59,8 +55,8 @@ module Initializer
     end
 
     def variable_assignment_statements
-      complete_parameter_list.inject("") do|definition, parameter|
-        "#{definition}#{parameter.assignment_statement}\n"
+      complete_parameter_list.inject("") do|current_assignment_body, parameter|
+        "#{current_assignment_body}#{parameter.assignment_statement}\n"
       end
     end
 
@@ -77,7 +73,7 @@ CTOR
     def expand
       body = build_ctor_definition
       target_class.class_eval body
-      target_class.const_set(:CTOR_BUILT_BY_INITIALIZER, self)
+      target_class.const_set(:INITIALIZER_MACRO, self)
     end
   end
 end

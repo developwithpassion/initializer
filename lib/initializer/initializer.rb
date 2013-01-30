@@ -4,7 +4,7 @@ module Initializer
   end
 
   def run_custom_initialization
-    self.class::CTOR_BUILT_BY_INITIALIZER.run_custom_initialization self
+    self.class::INITIALIZER_MACRO.run_custom_initialization self
   end
 
   module ClassMethods

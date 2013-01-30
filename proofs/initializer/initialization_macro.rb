@@ -36,7 +36,7 @@ module Initializer
         param :name
         param :age
         expand
-        Item::CTOR_BUILT_BY_INITIALIZER == self
+        Item::INITIALIZER_MACRO == self
       end
 
       def stored_parameter?(name)
@@ -75,39 +75,37 @@ module Initializer
 end
 
 
-def initializer(&configuration_block)
-  Initializer::InitializationMacro.new Item
+def macro
+  macro = Initializer::InitializationMacro.new Item
+  macro
 end
 
 proof 'An initialization stores its target class when created' do
-  initializer.prove { enriches_class? Item }
+  macro.prove { enriches_class? Item }
 end
 
 
 proof 'An initialization macro should maintain a list of its own parameter definitions' do
-  macro = Initializer::InitializationMacro.new Item
   macro.prove { stored_parameter? :name }
 end
 
 
 proof 'An initialization macro should only be able to have a singular splat parameter defined' do
-  macro = Initializer::InitializationMacro.new Item
   macro.prove { can_only_have_one_splat_parameter? :name }
 end
 
 proof 'An initialization macro should only be able to have a singular block parameter defined' do
-  macro = Initializer::InitializationMacro.new Item
   macro.prove { can_only_have_one_block_parameter? :name }
 end
 
 proof 'An initialization macro generates a ctor on the target class that does initialization of specified parameters' do
-  initializer.prove { initializes_variables_on_creation? }
+  macro.prove { initializes_variables_on_creation? }
 end
 
 proof 'An initialization macro stores itself on a constant of its target class when it is expanded, so that is can be leveraged later on when the actual instance is created' do
-  initializer.prove { added_to_constant_on_target? }
+  macro.prove { added_to_constant_on_target? }
 end
 
 proof 'An initialization macro runs custom initialization when an instance of its target class is created' do
-  initializer.prove { runs_custom_initialization? }
+  macro.prove { runs_custom_initialization? }
 end
