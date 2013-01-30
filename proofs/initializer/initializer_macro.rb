@@ -32,7 +32,7 @@ module Initializer
         item.value_set_by_custom_initialization == 42
       end
 
-      def added_to_constant_on_target?
+      def added_itself_to_constant_on_target?
         param :name
         param :age
         expand
@@ -103,7 +103,7 @@ proof 'Generates a ctor on the target class that does initialization of specifie
 end
 
 proof 'Stores itself on a constant of its target class when it is expanded, so that is can be leveraged later on when the actual instance is created' do
-  macro.prove { added_to_constant_on_target? }
+  macro.prove { added_itself_to_constant_on_target? }
 end
 
 proof 'Runs custom initialization when an instance of its target class is created' do
