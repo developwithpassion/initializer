@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Inline Simple CTOR Generation'
+title 'Example - Inline Simple CTOR Generation'
 =begin
 This example shows how to have a ctor generated using the simplest call mechanism available in the library
 =end

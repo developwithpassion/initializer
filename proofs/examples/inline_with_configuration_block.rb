@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Inline with configuration block'
+title 'Example - Inline with configuration block'
 =begin
 This example shows how to have a ctor generated using the simple
 inline style in conjunction with custom ctor logic. The block provided

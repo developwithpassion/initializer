@@ -51,7 +51,8 @@ module Initializer
 
     def parameter_declaration_statement
       parameter_names = complete_parameter_list.map{|item| item.method_parameter_name }.to_a
-      parameter_names.join(", ")
+      parameter_names = parameter_names.join(", ")
+      parameter_names
     end
 
     def variable_assignment_statements

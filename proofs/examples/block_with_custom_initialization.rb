@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Block with custom initialization logic'
+title 'Example - Block with custom initialization logic'
 =begin
 This example shows how to have a ctor generated using the block configuration style and taking advantage of being
 able to add custom "ctor" logic. The block provided to the extra_initialization call will be executed in the binding

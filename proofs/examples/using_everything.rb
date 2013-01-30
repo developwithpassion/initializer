@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Using everything'
+title 'Example - Using everything'
 =begin
   This example shows how to have a ctor generated that uses
   a mixture of all the different call structures:

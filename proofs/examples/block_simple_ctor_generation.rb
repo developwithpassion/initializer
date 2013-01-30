@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Block Simple CTOR Generation'
+title 'Example - Block Simple CTOR Generation'
 =begin
 This example shows how to have a ctor generated using the block configuration style call structure, that provides for access
 to configure different types of parameters (like splat and block). This example shows the most simple usage of this style

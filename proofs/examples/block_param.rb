@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Block Param'
+title 'Example - Block Param'
 =begin
   This example shows how to have a ctor generated with a block
   param
