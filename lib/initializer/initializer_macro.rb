@@ -1,5 +1,5 @@
 module Initializer
-  class InitializationMacro
+  class InitializerMacro
     attr_reader :target_class
     attr_reader :parameters
     attr_accessor :block_parameter

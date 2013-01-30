@@ -9,7 +9,7 @@ module Initializer
 
   module ClassMethods
     def initializer(*parameter_names, &configuration_block)
-      macro = InitializationMacro.new(self)
+      macro = InitializerMacro.new(self)
 
       parameter_names.each do|name|
         macro.param name

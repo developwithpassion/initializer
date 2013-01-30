@@ -9,7 +9,7 @@ class Item
 end
 
 module Initializer
-  class InitializationMacro
+  class InitializerMacro
     module Proof
       def initializes_variables_on_creation?
         param :name
@@ -76,11 +76,11 @@ end
 
 
 def macro
-  macro = Initializer::InitializationMacro.new Item
+  macro = Initializer::InitializerMacro.new Item
   macro
 end
 
-proof 'An initialization stores its target class when created' do
+proof 'An initializer macro stores its target class when created' do
   macro.prove { enriches_class? Item }
 end
 
