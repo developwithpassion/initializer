@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Parameters'
+title 'Parameters' 
 
 Parameter = Initializer::Parameter
 
@@ -19,32 +19,40 @@ end
 
 
 
-proof 'A regular parameter should display its parameter name without any special character' do
-  parameter = Parameter.build_regular_parameter(:name)
-  parameter.prove { well_formed_parameter_name?("name") }
+heading 'Regular Parameter' do
+  proof 'Display its parameter name without any special character' do
+    parameter = Parameter.build_regular_parameter(:name)
+    parameter.prove { well_formed_parameter_name?("name") }
+  end
 end
 
-proof 'A splat parameter should display its parameter name with a * prefix' do
-  parameter = Parameter.build_splat_parameter(:name)
-  parameter.prove { well_formed_parameter_name?("*name") }
+heading 'Splat Parameter' do
+  proof 'Displays its parameter name with a * prefix' do
+    parameter = Parameter.build_splat_parameter(:name)
+    parameter.prove { well_formed_parameter_name?("*name") }
+  end
 end
 
-proof 'A block parameter should display its parameter name with a & prefix' do
-  parameter = Parameter.build_block_parameter(:name)
-  parameter.prove { well_formed_parameter_name?("&name") }
+
+heading 'Block Parameter' do
+  def block_parameter
+    parameter = Parameter.build_block_parameter(:name)
+    parameter
+  end
+
+  proof 'Displays its parameter name with a & prefix' do
+    block_parameter.prove { well_formed_parameter_name?("&name") }
+  end
+
+  proof 'Generates an assignment statement by assigning its parameter name to its class variable name without the & being in the assignment ex (@name = name)' do
+    block_parameter.prove { generated_assignment_statement? "@name = name" }
+  end
 end
 
-proof 'A parameter should generate its assignment statement by assigning its parameter name to its class variable name' do
-  parameter = Parameter.build_regular_parameter(:name)
-  parameter.prove { generated_assignment_statement? "@name = name" }
-end
 
-proof 'A block parameter should generate its assignment statement by assigning its parameter name to its class variable name without the & being in the assignment' do
-  parameter = Parameter.build_block_parameter(:name)
-  parameter.prove { generated_assignment_statement? "@name = name" }
-end
-
-proof 'A splat parameter should generate its assignment statement by assigning its parameter name to its class variable name without the * being in the assigment' do
-  parameter = Parameter.build_splat_parameter(:name)
-  parameter.prove { generated_assignment_statement? "@name = name" }
+heading 'Regular and block parameters' do
+  proof 'Generates an assignment statement by assigning its parameter name to its class variable name' do
+    parameter = Parameter.build_regular_parameter(:name)
+    parameter.prove { generated_assignment_statement? "@name = name" }
+  end
 end

@@ -80,32 +80,32 @@ def macro
   macro
 end
 
-proof 'An initializer macro stores its target class when created' do
+proof 'Stores its target class when created' do
   macro.prove { enriches_class? Item }
 end
 
 
-proof 'An initialization macro should maintain a list of its own parameter definitions' do
+proof 'Maintains a list of its own parameter definitions' do
   macro.prove { stored_parameter? :name }
 end
 
 
-proof 'An initialization macro should only be able to have a singular splat parameter defined' do
+proof 'Can only have a singular splat parameter defined' do
   macro.prove { can_only_have_one_splat_parameter? :name }
 end
 
-proof 'An initialization macro should only be able to have a singular block parameter defined' do
+proof 'Can only have a singular block parameter defined' do
   macro.prove { can_only_have_one_block_parameter? :name }
 end
 
-proof 'An initialization macro generates a ctor on the target class that does initialization of specified parameters' do
+proof 'Generates a ctor on the target class that does initialization of specified parameters' do
   macro.prove { initializes_variables_on_creation? }
 end
 
-proof 'An initialization macro stores itself on a constant of its target class when it is expanded, so that is can be leveraged later on when the actual instance is created' do
+proof 'Stores itself on a constant of its target class when it is expanded, so that is can be leveraged later on when the actual instance is created' do
   macro.prove { added_to_constant_on_target? }
 end
 
-proof 'An initialization macro runs custom initialization when an instance of its target class is created' do
+proof 'Runs custom initialization when an instance of its target class is created' do
   macro.prove { runs_custom_initialization? }
 end

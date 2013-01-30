@@ -6,7 +6,7 @@ class SomeItem
   include Initializer
 end
 
-proof 'Including the initializer module provides the class with access to the initializer macro' do
+proof 'Provides the class with access to the initializer macro' do
   SomeItem.prove { respond_to? :initializer }
 end
 
@@ -26,7 +26,7 @@ end
 
 heading 'Using the initialization macro'
 
-proof 'Leveraging the initializer generates a ctor on the target type with the right ctor args and automatic initialization' do
+proof 'Leveraging the initializer macro generates a ctor on the target type with the right ctor args and automatic initialization' do
   name = 'John'
   age = '33'
   address = 'Some House'
