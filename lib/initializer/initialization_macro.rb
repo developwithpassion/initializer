@@ -6,9 +6,8 @@ module Initializer
     attr_accessor :splat_parameter
     attr_accessor :extra_initialization_block
 
-    def initialize(target_class,*ctor_parameter_names)
+    def initialize(target_class)
       @target_class = target_class
-      @ctor_parameter_names = ctor_parameter_names
       @parameters = {}
     end
 
