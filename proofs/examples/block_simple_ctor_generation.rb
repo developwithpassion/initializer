@@ -15,6 +15,16 @@ class BlockSimpleCTORGeneration
    param :address
  end
 
+=begin
+  The above is the equivalent of the following
+  def initialize(name, age, address)
+    @name = name
+    @age = age
+    @address = address
+  end
+=end
+ 
+
  module Proof
    def initialized_correctly?(name, age, address)
      @name == name && 

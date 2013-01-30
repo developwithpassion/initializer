@@ -2,8 +2,7 @@ require_relative '../proofs_init'
 
 title 'Splat Param Example'
 =begin
-This example shows how to have a ctor generated with a splat
-param that does not do expansion on assignment
+This example shows how to have a ctor generated that includes a splat param 
 =end
 
 class SplatParamExample

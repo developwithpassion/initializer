@@ -1,8 +1,6 @@
 module Initializer
   class InitializationMacro
     attr_reader :target_class
-    attr_reader :ctor_parameter_names
-    attr_reader :parameters
     attr_reader :parameters
     attr_accessor :block_parameter
     attr_accessor :splat_parameter
@@ -15,9 +13,8 @@ module Initializer
     end
 
 
-    def configure_parameter(parameter, add_to_all_parameters = true)
-      parameters[parameter.name] = parameter if add_to_all_parameters
-      parameter
+    def add_parameter_to_all_parameters(parameter)
+      parameters[parameter.name] = parameter 
     end
 
     def extra_initialization(&initialization_block)
@@ -31,21 +28,21 @@ module Initializer
 
     def param(name)
       param = Parameter.build_regular_parameter name
-      configure_parameter(param)
+      add_parameter_to_all_parameters(param)
       param
     end
 
     def splat_param(name, &parameter_configuration_block)
       raise 'Only one splat parameter can be defined for a ctor' unless splat_parameter.nil?
       param = Parameter.build_splat_parameter name
-      self.splat_parameter = configure_parameter(param, false,  &parameter_configuration_block)
+      self.splat_parameter = param
       param
     end
 
     def block_param(name, &parameter_configuration_block)
       raise 'Only one block parameter can be defined for a ctor' unless block_parameter.nil?
       param = Parameter.build_block_parameter(name)
-      self.block_parameter = configure_parameter(param, false, &parameter_configuration_block)
+      self.block_parameter = param
       param
     end
 
@@ -62,10 +59,9 @@ module Initializer
     end
 
     def variable_assignment_statements
-      initial_assignment_statements = complete_parameter_list.inject("") do|definition, parameter|
+      complete_parameter_list.inject("") do|definition, parameter|
         "#{definition}#{parameter.assignment_statement}\n"
       end
-
     end
 
     def build_ctor_definition
