@@ -17,6 +17,10 @@ module InitializerModule
       end
     end
   end
+
+  class ClassMethodHarness
+    include ::Initializer::ClassMethods
+  end
 end
 
 heading 'The initializer class method' do

@@ -62,6 +62,11 @@ CTOR
     def define_initializer
       body = build_initializer_definition
       target_class.class_eval body
+      parameters.each do|parameter|
+        if (parameter.respond_to? :generate_attr)
+          parameter.generate_attr target_class
+        end
+      end
     end
   end
 end

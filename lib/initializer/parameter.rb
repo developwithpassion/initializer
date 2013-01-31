@@ -29,6 +29,7 @@ module Initializer
     def variable_name
       "@#{name.to_s}"
     end
+
   end
 end
 
