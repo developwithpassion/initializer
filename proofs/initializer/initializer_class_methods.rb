@@ -22,7 +22,7 @@ module InitializerModule
         param.extension_module == expected_mixin
       end
       def creates_no_accessors_parameter_configuration?(name)
-        creates_parameter_configuration?(name, :no_accessors, Initializer::ParameterWithNoAccessors)
+        creates_parameter_configuration?(name, :no_accessors, Initializer::NoAccessorsParameter)
       end
       def creates_write_parameter_configuration?(name)
         creates_parameter_configuration?(name, :writer, Initializer::WriterParameter)

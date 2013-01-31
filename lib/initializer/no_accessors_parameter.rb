@@ -1,5 +1,5 @@
 module Initializer
-  module ParameterWithNoAccessors
+  module NoAccessorsParameter
     def generate_attr(target)
     end
   end

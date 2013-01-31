@@ -5,7 +5,7 @@ module Initializer
 
   module ClassMethods
     def no_accessors(parameter_name)
-      ParameterConfig.new parameter_name, ParameterWithNoAccessors
+      ParameterConfig.new parameter_name, NoAccessorsParameter
     end
 
     def reader(parameter_name)
@@ -23,7 +23,7 @@ module Initializer
     alias :r :reader
     alias :w :writer
     alias :rw :accessor
-    alias :a :rw
+    alias :a :accessor
 
     def initializer(*parameters)
       macro = InitializerMacro.new(self)
@@ -38,7 +38,6 @@ module Initializer
 
       parameters.each do |parameter|
         parameter_configuration = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
-
         parameter_configuration.configure macro
       end
 
