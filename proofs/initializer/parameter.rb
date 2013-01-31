@@ -8,7 +8,7 @@ module Initializer
   class Parameter
     module Proof
       def well_formed_parameter_name?(expected)
-        method_parameter_name == expected
+        parameter_name == expected
       end
       def generated_assignment_statement?(expected)
         assignment_statement == expected

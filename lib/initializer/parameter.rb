@@ -1,11 +1,11 @@
 module Initializer
   class Parameter
     attr_reader :name
-    attr_reader :method_parameter_prefix
+    attr_reader :parameter_prefix
 
     def initialize(name, prefix)
       @name = name
-      @method_parameter_prefix = prefix
+      @parameter_prefix = prefix
     end
 
     def self.build_regular_parameter(name)
@@ -22,8 +22,8 @@ module Initializer
       "#{variable_name} = #{name.to_s}"
     end
 
-    def method_parameter_name
-      "#{method_parameter_prefix}#{name.to_s}"
+    def parameter_name
+      "#{parameter_prefix}#{name.to_s}"
     end
 
     def variable_name

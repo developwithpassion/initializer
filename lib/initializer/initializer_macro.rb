@@ -1,14 +1,14 @@
 module Initializer
   class InitializerMacro
     attr_reader :target_class
-    attr_reader :parameters
+    attr_reader :value_parameters
     attr_accessor :block_parameter
     attr_accessor :splat_parameter
     attr_accessor :extra_initialization_block
 
     def initialize(target_class)
       @target_class = target_class
-      @parameters = {}
+      @value_parameters = {}
     end
 
 
@@ -23,7 +23,7 @@ module Initializer
 
     def param(name)
       param = Parameter.build_regular_parameter name
-      parameters[param.name] = param
+      value_parameters[param.name] = param
       param
     end
 
@@ -41,21 +41,21 @@ module Initializer
       param
     end
 
-    def complete_parameter_list
-      all_parameters = parameters.values.dup.to_a
-      all_parameters << splat_parameter if splat_parameter
-      all_parameters << block_parameter if block_parameter
-      all_parameters
+    def parameters
+      parameters = value_parameters.values.dup.to_a
+      parameters << splat_parameter if splat_parameter
+      parameters << block_parameter if block_parameter
+      parameters
     end
 
     def parameter_declaration_statement
-      parameter_names = complete_parameter_list.map{|item| item.method_parameter_name }.to_a
+      parameter_names = parameters.map{|item| item.parameter_name }.to_a
       parameter_names = parameter_names.join(", ")
       parameter_names
     end
 
     def variable_assignment_statements
-      complete_parameter_list.inject("") do|current_assignment_body, parameter|
+      parameters.inject("") do|current_assignment_body, parameter|
         "#{current_assignment_body}#{parameter.assignment_statement}\n"
       end
     end
@@ -65,15 +65,13 @@ module Initializer
 <<CTOR
         def initialize(#{parameter_declaration_statement})
           #{variable_assignment_statements}   
-          run_custom_initialization
         end
 CTOR
     end
 
-    def expand
+    def define_initializer
       body = build_ctor_definition
       target_class.class_eval body
-      target_class.const_set(:INITIALIZER_MACRO, self)
     end
   end
 end

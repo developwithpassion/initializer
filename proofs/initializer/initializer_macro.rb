@@ -14,40 +14,25 @@ module Initializer
       def initializes_variables_on_creation?
         param :name
         param :age
-        expand
+        define_initializer
 
         item = target_class.new('John',23)
 
         item.name == 'John' && item.age = 23
       end
 
-      def runs_custom_initialization?
-        param :name
-        param :age
-        extra_initialization do
-          @value_set_by_custom_initialization = 42
-        end
-        expand
-        item = target_class.new('John',23)
-        item.value_set_by_custom_initialization == 42
-      end
 
       def added_itself_to_constant_on_target?
         param :name
         param :age
-        expand
+        define_initializer
         Item::INITIALIZER_MACRO == self
       end
 
       def stored_parameter?(name)
         param name 
-        parameters.has_key?(name)
+        value_parameters.has_key?(name)
       end
-
-      def enriches_class?(target)
-        target_class == target
-      end
-
 
       def can_only_have_one_splat_parameter?(name)
         had_no_splat_param = splat_parameter.nil?
@@ -80,32 +65,20 @@ def macro
   macro
 end
 
-proof 'Stores its target class when created' do
-  macro.prove { enriches_class? Item }
-end
 
-
-proof 'Maintains a list of its own parameter definitions' do
+proof 'Keeps a list of the value parameters definitions' do
   macro.prove { stored_parameter? :name }
 end
 
-
-proof 'Can only have a singular splat parameter defined' do
+proof 'Can have a single splat parameter' do
   macro.prove { can_only_have_one_splat_parameter? :name }
 end
 
-proof 'Can only have a singular block parameter defined' do
+proof 'Can have a single block parameter' do
   macro.prove { can_only_have_one_block_parameter? :name }
 end
 
-proof 'Generates a ctor on the target class that does initialization of specified parameters' do
+proof 'Generates an initializer on the target class that assigns the parameters to variables' do
   macro.prove { initializes_variables_on_creation? }
 end
 
-proof 'Stores itself on a constant of its target class when it is expanded, so that is can be leveraged later on when the actual instance is created' do
-  macro.prove { added_itself_to_constant_on_target? }
-end
-
-proof 'Runs custom initialization when an instance of its target class is created' do
-  macro.prove { runs_custom_initialization? }
-end
