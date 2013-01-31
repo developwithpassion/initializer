@@ -2,16 +2,19 @@ require_relative '../proofs_init'
 
 title 'Initializer Macro Class'
 
-class Item
-  include Initializer
-  attr_accessor :name,:age
-  attr_accessor :value_set_by_custom_initialization
+module InitializerMacroClass
+  class Item
+    include Initializer
+    attr_accessor :name,:age
+    attr_accessor :value_set_by_custom_initialization
+  end
+
 end
 
 module Initializer
   class InitializerMacro
     module Proof
-      def initializes_variables_on_creation?
+      def initializes_variables?
         add_parameter :name
         add_parameter :age
         define_initializer
@@ -21,13 +24,6 @@ module Initializer
         item.name == 'John' && item.age = 23
       end
 
-
-      def added_itself_to_constant_on_target?
-        add_parameter :name
-        add_parameter :age
-        define_initializer
-        Item::INITIALIZER_MACRO == self
-      end
 
       def stored_parameter?(name)
         add_parameter name 
@@ -61,7 +57,7 @@ end
 
 
 def macro
-  macro = Initializer::InitializerMacro.new Item
+  macro = Initializer::InitializerMacro.new InitializerMacroClass::Item
   macro
 end
 
@@ -79,6 +75,6 @@ proof 'Can have a single block parameter' do
 end
 
 proof 'Generates an initializer on the target class that assigns the parameters to variables' do
-  macro.prove { initializes_variables_on_creation? }
+  macro.prove { initializes_variables? }
 end
 

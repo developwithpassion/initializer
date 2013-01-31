@@ -17,7 +17,10 @@ module Initializer
   end
 end
 
-
+proof 'Generate an assignment statement that assigs the parameter to an instance variable' do
+  parameter = Parameter.regular_parameter(:name)
+  parameter.prove { generated_assignment_statement? "@name = name" }
+end
 
 heading 'Regular Parameter' do
   proof 'Parameter name has no prefix' do
@@ -42,17 +45,5 @@ heading 'Block Parameter' do
 
   proof 'Parameter name has a & prefix' do
     block_parameter.prove { well_formed_parameter_name?("&name") }
-  end
-
-  proof 'Generates an assignment statement that assigns the parameter to an instance variable' do
-    block_parameter.prove { generated_assignment_statement? "@name = name" }
-  end
-end
-
-
-heading 'Regular and block parameters' do
-  proof 'Generates an assignment statement that assigs the parameter to an instance variable' do
-    parameter = Parameter.regular_parameter(:name)
-    parameter.prove { generated_assignment_statement? "@name = name" }
   end
 end
