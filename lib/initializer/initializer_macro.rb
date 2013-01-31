@@ -4,7 +4,6 @@ module Initializer
     attr_reader :value_parameters
     attr_accessor :block_parameter
     attr_accessor :splat_parameter
-    attr_accessor :extra_initialization_block
 
     def initialize(target_class)
       @target_class = target_class
@@ -12,31 +11,22 @@ module Initializer
     end
 
 
-    def extra_initialization(&initialization_block)
-      @extra_initialization_block = initialization_block
-    end
-
-    def run_custom_initialization(target_instance)
-      target_instance.instance_eval &extra_initialization_block if extra_initialization_block
-    end
-
-
-    def param(name)
-      param = Parameter.build_regular_parameter name
+    def add_parameter(name)
+      param = Parameter.regular_parameter name
       value_parameters[param.name] = param
       param
     end
 
-    def splat_param(name, &parameter_configuration_block)
+    def add_splat_param(name, &parameter_configuration_block)
       raise 'Only one splat parameter can be defined for a ctor' unless splat_parameter.nil?
-      param = Parameter.build_splat_parameter name
+      param = Parameter.splat_parameter name
       self.splat_parameter = param
       param
     end
 
-    def block_param(name, &parameter_configuration_block)
+    def add_block_param(name, &parameter_configuration_block)
       raise 'Only one block parameter can be defined for a ctor' unless block_parameter.nil?
-      param = Parameter.build_block_parameter(name)
+      param = Parameter.block_parameter(name)
       self.block_parameter = param
       param
     end

@@ -8,13 +8,13 @@ module Initializer
       @parameter_prefix = prefix
     end
 
-    def self.build_regular_parameter(name)
+    def self.regular_parameter(name)
       new name, ''
     end
-    def self.build_splat_parameter(name)
+    def self.splat_parameter(name)
       new name, "*"
     end
-    def self.build_block_parameter(name)
+    def self.block_parameter(name)
       new name, "&"
     end
 

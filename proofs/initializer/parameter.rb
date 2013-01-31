@@ -20,15 +20,15 @@ end
 
 
 heading 'Regular Parameter' do
-  proof 'Display its parameter name without any special character' do
-    parameter = Parameter.build_regular_parameter(:name)
+  proof 'Parameter name has no prefix' do
+    parameter = Parameter.regular_parameter(:name)
     parameter.prove { well_formed_parameter_name?("name") }
   end
 end
 
 heading 'Splat Parameter' do
-  proof 'Displays its parameter name with a * prefix' do
-    parameter = Parameter.build_splat_parameter(:name)
+  proof 'Parameter name has a * prefix' do
+    parameter = Parameter.splat_parameter(:name)
     parameter.prove { well_formed_parameter_name?("*name") }
   end
 end
@@ -36,23 +36,23 @@ end
 
 heading 'Block Parameter' do
   def block_parameter
-    parameter = Parameter.build_block_parameter(:name)
+    parameter = Parameter.block_parameter(:name)
     parameter
   end
 
-  proof 'Displays its parameter name with a & prefix' do
+  proof 'Parameter name has a & prefix' do
     block_parameter.prove { well_formed_parameter_name?("&name") }
   end
 
-  proof 'Generates an assignment statement by assigning its parameter name to its class variable name without the & being in the assignment ex (@name = name)' do
+  proof 'Generates an assignment statement that assigns the parameter to an instance variable' do
     block_parameter.prove { generated_assignment_statement? "@name = name" }
   end
 end
 
 
 heading 'Regular and block parameters' do
-  proof 'Generates an assignment statement by assigning its parameter name to its class variable name' do
-    parameter = Parameter.build_regular_parameter(:name)
+  proof 'Generates an assignment statement that assigs the parameter to an instance variable' do
+    parameter = Parameter.regular_parameter(:name)
     parameter.prove { generated_assignment_statement? "@name = name" }
   end
 end

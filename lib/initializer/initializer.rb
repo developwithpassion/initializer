@@ -8,7 +8,7 @@ module Initializer
       macro = InitializerMacro.new(self)
 
       parameter_names.each do|name|
-        macro.param name
+        macro.add_parameter name
       end
 
       macro.define_initializer

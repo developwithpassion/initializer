@@ -25,7 +25,7 @@ Make the gem available for `path-gem`.
 class SomeItem
   include initializer
 
-  initialize :name, :age, :address
+  initializer :name, :age, :address
 end
 ```
 

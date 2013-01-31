@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Initialization Macro'
+title 'Initializer Macro Class'
 
 class Item
   include Initializer
@@ -12,8 +12,8 @@ module Initializer
   class InitializerMacro
     module Proof
       def initializes_variables_on_creation?
-        param :name
-        param :age
+        add_parameter :name
+        add_parameter :age
         define_initializer
 
         item = target_class.new('John',23)
@@ -23,22 +23,22 @@ module Initializer
 
 
       def added_itself_to_constant_on_target?
-        param :name
-        param :age
+        add_parameter :name
+        add_parameter :age
         define_initializer
         Item::INITIALIZER_MACRO == self
       end
 
       def stored_parameter?(name)
-        param name 
+        add_parameter name 
         value_parameters.has_key?(name)
       end
 
       def can_only_have_one_splat_parameter?(name)
         had_no_splat_param = splat_parameter.nil?
-        splat_param name
+        add_splat_param name
         begin
-          splat_param name
+          add_splat_param name
         rescue
           return had_no_splat_param && !splat_parameter.nil?
         end
@@ -47,9 +47,9 @@ module Initializer
 
       def can_only_have_one_block_parameter?(name)
         had_no_block_param = block_parameter.nil?
-        block_param name
+        add_block_param name
         begin
-          block_param name
+          add_block_param name
         rescue
           return had_no_block_param && !block_parameter.nil?
         end

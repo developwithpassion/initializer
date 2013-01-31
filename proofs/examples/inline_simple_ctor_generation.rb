@@ -20,7 +20,7 @@ class InlineSimpleCTORGeneration
 =end
 
  module Proof
-   def initialized_correctly?(name, age, address)
+   def initialized?(name, age, address)
     @name = name   
     @age = age   
     @address = address   
@@ -28,12 +28,12 @@ class InlineSimpleCTORGeneration
  end
 end
 
-proof 'Ctor should be generated correctly' do
+proof 'Initializer is generated' do
   name = 'John'
   age = 23
   address = 'Some House'
 
   item = InlineSimpleCTORGeneration.new(name, age, address)
 
-  item.prove { initialized_correctly?(name, age, address) }
+  item.prove { initialized?(name, age, address) }
 end
