@@ -3,7 +3,7 @@ require_relative '../proofs_init'
 title 'Initializer Module'
 
 
-module IntializerModule
+module InitializerModule
   class SomeClass
     include Initializer
 
