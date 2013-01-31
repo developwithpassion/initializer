@@ -1,5 +1,5 @@
 module Initializer
-  module AttrParameter
+  module AccessorParameter
     def generate_attr(target)
       name = self.name
       target.instance_eval do

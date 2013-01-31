@@ -18,7 +18,7 @@ module InitializerModule
     module Proof
       def creates_parameter_configuration?(name, method_to_call, expected_mixin)
         param = send(method_to_call, name)
-        param.name == name 
+        param.parameter_name == name 
         param.extension_module == expected_mixin
       end
       def creates_no_accessors_parameter_configuration?(name)
@@ -30,8 +30,8 @@ module InitializerModule
       def creates_read_parameter_configuration?(name)
         creates_parameter_configuration?(name, :reader, Initializer::ReaderParameter)
       end
-      def creates_attr_parameter_configuration?(name)
-        creates_parameter_configuration?(name, :accessor, Initializer::AttrParameter)
+      def creates_accessor_parameter_configuration?(name)
+        creates_parameter_configuration?(name, :accessor, Initializer::AccessorParameter)
       end
     end
   end
@@ -51,7 +51,7 @@ end
 
 heading 'Accessor macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the AttrParameter module as its mixin' do
-    class_methods.prove { creates_attr_parameter_configuration? :age }
+    class_methods.prove { creates_accessor_parameter_configuration? :age }
   end
 end
 

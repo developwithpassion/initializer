@@ -1,4 +1,4 @@
-require_relative 'initializer/attr_parameter'
+require_relative 'initializer/accessor_parameter'
 require_relative 'initializer/reader_parameter'
 require_relative 'initializer/writer_parameter'
 require_relative 'initializer/parameter'

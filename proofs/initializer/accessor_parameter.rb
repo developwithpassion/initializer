@@ -1,19 +1,19 @@
 require_relative '../proofs_init'
 
-title 'Attr Parameter' 
+title 'Accessor Parameter' 
 
 module AttrParameter
   class SomeClass
 
   end
   class AParameter
-    include Initializer::AttrParameter
+    include Initializer::AccessorParameter
     def name
       :name
     end
 
     module Proof
-      def generates_attr_writer?(target)
+      def generates_accessor?(target)
         original = target.new
         had_no_accessors = !(original.respond_to?(:name) || original.respond_to?(:name=))
         generate_attr target
@@ -33,6 +33,6 @@ end
 
 heading 'Generating the attribute' do
   proof 'Adds an attr_accessor to its target class' do
-    parameter.prove { generates_attr_writer?(::AttrParameter::SomeClass) }
+    parameter.prove { generates_accessor?(::AttrParameter::SomeClass) }
   end
 end

@@ -23,7 +23,7 @@ module InitializerModule
   end
 end
 
-heading 'The initializer class method' do
+heading 'The initializer macro style method' do
   proof 'Generates the initializer with the specified initilizer args and variable initialization' do
     name = 'John'
     age = '33'

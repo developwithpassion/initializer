@@ -1,5 +1,5 @@
 require 'initializer/parameter'
-require 'initializer/attr_parameter'
+require 'initializer/accessor_parameter'
 require 'initializer/reader_parameter'
 require 'initializer/writer_parameter'
 require 'initializer/parameter_with_no_accessors'

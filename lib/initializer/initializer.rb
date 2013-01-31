@@ -17,7 +17,7 @@ module Initializer
     end
 
     def accessor(parameter_name)
-      ParameterConfig.new parameter_name, AttrParameter
+      ParameterConfig.new parameter_name, AccessorParameter
     end
 
     alias :r :reader
@@ -28,16 +28,18 @@ module Initializer
     def initializer(*parameters)
       macro = InitializerMacro.new(self)
       last_arg = parameters.last
-      default_visibility = :r
+      default_visibility = :reader
 
       if last_arg.is_a? Hash 
         parameters.pop
         default_visibility = last_arg[:visibility]
       end
 
+
       parameters.each do |parameter|
-        parameter = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
-        parameter.configure macro
+        parameter_configuration = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
+
+        parameter_configuration.configure macro
       end
 
       macro.define_initializer
