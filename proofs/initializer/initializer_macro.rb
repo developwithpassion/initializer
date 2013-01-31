@@ -62,7 +62,7 @@ def macro
 end
 
 
-proof 'Keeps a list of the value parameters definitions' do
+proof 'Keeps a list of the value parameter definitions' do
   macro.prove { stored_parameter? :name }
 end
 

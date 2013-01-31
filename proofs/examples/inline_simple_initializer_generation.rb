@@ -1,11 +1,11 @@
 require_relative '../proofs_init'
 
-title 'Example - Inline Simple CTOR Generation'
+title 'Example - Inline Simple Initializer Generation'
 =begin
-This example shows how to have a ctor generated using the simplest call mechanism available in the library
+This example shows how to have a initializer generated using the simplest call mechanism available in the library
 =end
 
-module InlineSimpleCTORGeneration
+module InlineSimpleInitializerGeneration
   class Item
     include Initializer 
 
@@ -35,7 +35,7 @@ proof 'Initializer is generated' do
   age = 23
   address = 'Some House'
 
-  item = InlineSimpleCTORGeneration::Item.new(name, age, address)
+  item = InlineSimpleInitializerGeneration::Item.new(name, age, address)
 
   item.prove { initialized?(name, age, address) }
 end

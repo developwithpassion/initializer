@@ -18,14 +18,14 @@ module Initializer
     end
 
     def add_splat_param(name, &parameter_configuration_block)
-      raise 'Only one splat parameter can be defined for a ctor' unless splat_parameter.nil?
+      raise 'Only one splat parameter can be defined for an initializer' unless splat_parameter.nil?
       param = Parameter.splat_parameter name
       self.splat_parameter = param
       param
     end
 
     def add_block_param(name, &parameter_configuration_block)
-      raise 'Only one block parameter can be defined for a ctor' unless block_parameter.nil?
+      raise 'Only one block parameter can be defined for an initializer' unless block_parameter.nil?
       param = Parameter.block_parameter(name)
       self.block_parameter = param
       param
@@ -38,7 +38,7 @@ module Initializer
       parameters
     end
 
-    def parameter_declaration_statement
+    def parameter_names
       parameter_names = parameters.map{|item| item.parameter_name }.to_a
       parameter_names = parameter_names.join(", ")
       parameter_names
@@ -50,17 +50,17 @@ module Initializer
       end
     end
 
-    def build_ctor_definition
+    def build_initializer_definition
       body = 
 <<CTOR
-        def initialize(#{parameter_declaration_statement})
+        def initialize(#{parameter_names})
           #{variable_assignment_statements}   
         end
 CTOR
     end
 
     def define_initializer
-      body = build_ctor_definition
+      body = build_initializer_definition
       target_class.class_eval body
     end
   end

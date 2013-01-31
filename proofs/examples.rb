@@ -1,1 +1,1 @@
-require_relative 'examples/inline_simple_ctor_generation'
+require_relative 'examples/inline_simple_initializer_generation'
