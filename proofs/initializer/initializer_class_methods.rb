@@ -27,34 +27,30 @@ module Initializer
   end
 end
 
-def dsl
-  ::Initializer::ClassMethods
+def config(visibility)
+  ::Initializer::ClassMethods.send visibility, :age
 end
 
 heading 'Reader macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the ReaderParameter module as its mixin' do
-    config = dsl.reader(:age)
-    config.prove { reader_parameter? && named? }
+    config(:reader).prove { reader_parameter? && named? }
   end
 end
 
 heading 'Writer macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the WriterParameter module as its mixin' do
-    config = dsl.writer(:age)
-    config.prove { writer_parameter? && named? }
+    config(:writer).prove { writer_parameter? && named? }
   end
 end
 
 heading 'Accessor macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the AttrParameter module as its mixin' do
-    config = dsl.accessor(:age)
-    config.prove { accessor_parameter? && named? }
+    config(:accessor).prove { accessor_parameter? && named? }
   end
 end
 
 heading 'No accessor macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the ParameterWithNoAccessors module as its mixin' do
-    config = dsl.no_accessor(:age)
-    config.prove { no_accessor_parameter? && named? }
+    config(:no_accessor).prove { no_accessor_parameter? && named? }
   end
 end
