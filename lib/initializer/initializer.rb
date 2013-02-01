@@ -4,7 +4,7 @@ module Initializer
   end
 
   module ClassMethods
-    def no_accessors(parameter_name)
+    def no_accessor(parameter_name)
       ParameterConfig.new parameter_name, NoAccessorParameter
     end
 
