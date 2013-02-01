@@ -5,8 +5,8 @@ title 'Initializer DSL'
 module Initializer
   class ParameterConfig
     module Proof
-      def named?(name)
-        parameter_name == name
+      def named?
+        parameter_name == :age
       end
       def extension?(mod)
         extension_module == mod
@@ -34,27 +34,27 @@ end
 heading 'Reader macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the ReaderParameter module as its mixin' do
     config = dsl.reader(:age)
-    config.prove { reader_parameter? && named?(:age) }
+    config.prove { reader_parameter? && named? }
   end
 end
 
 heading 'Writer macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the WriterParameter module as its mixin' do
     config = dsl.writer(:age)
-    config.prove { writer_parameter? && named?(:age) }
+    config.prove { writer_parameter? && named? }
   end
 end
-# NOTE solve issue with send
+
 heading 'Accessor macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the AttrParameter module as its mixin' do
     config = dsl.accessor(:age)
-    config.prove { accessor_parameter? && named?(:age) }
+    config.prove { accessor_parameter? && named? }
   end
 end
 
 heading 'No accessor macro style method' do
   proof 'Creates a ParameterConfig with the specified name and the ParameterWithNoAccessors module as its mixin' do
     config = dsl.no_accessor(:age)
-    config.prove { no_accessor_parameter? && named?(:age) }
+    config.prove { no_accessor_parameter? && named? }
   end
 end
