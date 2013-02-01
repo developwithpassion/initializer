@@ -2,11 +2,10 @@ require_relative '../proofs_init'
 
 title 'Initializer Macro Class'
 
-module InitializerMacroClass
+module InitializerMacro
   class Item
     include Initializer
     attr_accessor :name,:age
-    attr_accessor :value_set_by_custom_initialization
   end
 
 end
@@ -17,6 +16,7 @@ module Initializer
       def initializes_variables?
         add_regular_parameter :name
         add_regular_parameter :age
+
         define_initializer
 
         item = target_class.new('John',23)
@@ -57,7 +57,7 @@ end
 
 
 def macro
-  macro = Initializer::InitializerMacro.new InitializerMacroClass::Item
+  macro = Initializer::InitializerMacro.new InitializerMacro::Item
   macro
 end
 
