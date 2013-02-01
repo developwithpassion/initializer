@@ -27,7 +27,7 @@ module Initializer
 
       def stored_parameter?(name)
         add_regular_parameter name 
-        value_parameters.has_key?(name)
+        regular_parameters.has_key?(name)
       end
 
       def can_only_have_one_splat_parameter?(name)

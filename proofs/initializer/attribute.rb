@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-title 'Parameter Config' 
+title 'Attribute' 
 
 module Attribute
   module VisibilityMixin
@@ -16,15 +16,19 @@ module Initializer
   class Attribute
     module Proof
 
-      def added_parameter_to_initializer_macro?(name)
+      def configure_macro
         macro= InitializerMacro.new ::Attribute::SomeClass
         configure macro
+        macro
+      end
+
+      def added_parameter_to_initializer_macro?(name)
+        macro = configure_macro
         macro.parameters.count == 1
       end
 
       def extended_parameter?
-        macro= InitializerMacro.new ::Attribute::SomeClass
-        configure macro
+        macro= configure_macro
         macro.parameters[0].is_a? ::Attribute::VisibilityMixin
       end
     end
