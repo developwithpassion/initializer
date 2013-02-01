@@ -4,10 +4,7 @@ module Initializer
   end
 
   module ClassMethods
-    def no_accessors(parameter_name)
-      ParameterConfig.new parameter_name, NoAccessorParameter
-    end
-
+    extend self
     def reader(parameter_name)
       ParameterConfig.new parameter_name, ReaderParameter
     end
@@ -18,6 +15,10 @@ module Initializer
 
     def accessor(parameter_name)
       ParameterConfig.new parameter_name, AccessorParameter
+    end
+
+    def no_accessor(parameter_name)
+      ParameterConfig.new parameter_name, NoAccessorParameter
     end
 
     alias :r :reader
