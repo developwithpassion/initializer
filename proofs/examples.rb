@@ -1,1 +1,0 @@
-require_relative 'examples/inline_simple_initializer_generation'

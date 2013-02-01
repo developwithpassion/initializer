@@ -4,11 +4,42 @@ module Initializer
   end
 
   module ClassMethods
-    def initializer(*parameter_names)
-      macro = InitializerMacro.new(self)
+    extend self
+    def reader(parameter_name)
+      ParameterConfig.new parameter_name, ReaderParameter
+    end
 
-      parameter_names.each do|name|
-        macro.add_parameter name
+    def writer(parameter_name)
+      ParameterConfig.new parameter_name, WriterParameter
+    end
+
+    def accessor(parameter_name)
+      ParameterConfig.new parameter_name, AccessorParameter
+    end
+
+    def no_accessor(parameter_name)
+      ParameterConfig.new parameter_name, NoAccessorParameter
+    end
+
+    alias :r :reader
+    alias :w :writer
+    alias :rw :accessor
+    alias :a :accessor
+
+    def initializer(*parameters)
+      macro = InitializerMacro.new(self)
+      last_arg = parameters.last
+      default_visibility = :reader
+
+      if last_arg.is_a? Hash 
+        parameters.pop
+        default_visibility = last_arg[:visibility]
+      end
+
+
+      parameters.each do |parameter|
+        parameter_configuration = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
+        parameter_configuration.configure macro
       end
 
       macro.define_initializer

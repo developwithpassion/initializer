@@ -17,10 +17,14 @@ module InitializerModule
       end
     end
   end
+
+  class ClassMethodHarness
+    include ::Initializer::ClassMethods
+  end
 end
 
-heading 'The initializer class method' do
-  proof 'Generates the initializer with the specified initilizer args and variable initialization' do
+heading 'The initializer macro style method' do
+  proof 'Generates the initializer with the specified args and variable initialization' do
     name = 'John'
     age = '33'
     address = 'Some House'
