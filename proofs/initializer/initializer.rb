@@ -24,7 +24,7 @@ module InitializerModule
 end
 
 heading 'The initializer macro style method' do
-  proof 'Generates the initializer with the specified initilizer args and variable initialization' do
+  proof 'Generates the initializer with the specified args and variable initialization' do
     name = 'John'
     age = '33'
     address = 'Some House'
