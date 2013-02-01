@@ -15,8 +15,8 @@ module Initializer
   class InitializerMacro
     module Proof
       def initializes_variables?
-        add_parameter :name
-        add_parameter :age
+        add_regular_parameter :name
+        add_regular_parameter :age
         define_initializer
 
         item = target_class.new('John',23)
@@ -26,7 +26,7 @@ module Initializer
 
 
       def stored_parameter?(name)
-        add_parameter name 
+        add_regular_parameter name 
         value_parameters.has_key?(name)
       end
 

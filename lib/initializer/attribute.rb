@@ -9,7 +9,7 @@ module Initializer
     end
 
     def configure(macro)
-      param = macro.add_parameter parameter_name
+      param = macro.add_regular_parameter parameter_name
       param.extend visibility_extension
     end
   end

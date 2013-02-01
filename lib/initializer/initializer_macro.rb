@@ -2,21 +2,18 @@ module Initializer
   class InitializerMacro
     attr_reader :target_class
 
-    # TODO should be regular parameter
-    attr_reader :value_parameters
-
+    attr_reader :regular_parameters
     attr_accessor :block_parameter
     attr_accessor :splat_parameter
 
     def initialize(target_class)
       @target_class = target_class
-      @value_parameters = {}
+      @regular_parameters = {}
     end
 
-    # TODO should be regular parameter
-    def add_parameter(name)
+    def add_regular_parameter(name)
       param = Parameter.regular_parameter name
-      value_parameters[param.name] = param
+      regular_parameters[param.name] = param
       param
     end
 
@@ -35,7 +32,7 @@ module Initializer
     end
 
     def parameters
-      parameters = value_parameters.values.dup.to_a
+      parameters = regular_parameters.values.dup.to_a
       parameters << splat_parameter if splat_parameter
       parameters << block_parameter if block_parameter
       parameters
