@@ -3,17 +3,19 @@ module Initializer
     attr_reader :name
     attr_reader :parameter_prefix
 
-    def initialize(name, prefix)
+    def initialize(name, prefix='')
       @name = name
       @parameter_prefix = prefix
     end
 
     def self.regular_parameter(name)
-      new name, ''
+      new name
     end
+
     def self.splat_parameter(name)
       new name, "*"
     end
+    
     def self.block_parameter(name)
       new name, "&"
     end
@@ -37,6 +39,7 @@ module Initializer
           target.instance_eval do
             attr_reader name
           end
+          target
         end
       end
 
@@ -46,6 +49,7 @@ module Initializer
           target.instance_eval do
             attr_writer name
           end
+          target
         end
       end
 
@@ -55,11 +59,13 @@ module Initializer
           target.instance_eval do
             attr_accessor name
           end
+          target
         end
       end
 
       module NoAccessor
         def generate_attr(target)
+          target
         end
       end
     end
