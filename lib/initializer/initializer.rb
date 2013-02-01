@@ -25,6 +25,7 @@ module Initializer
     alias :w :writer
     alias :rw :accessor
     alias :a :accessor
+    alias :na :no_accessor
 
     def initializer(*parameters)
       macro = InitializerMacro.new(self)
