@@ -5,7 +5,7 @@ module Initializer
 
   module ClassMethods
     def no_accessors(parameter_name)
-      ParameterConfig.new parameter_name, NoAccessorsParameter
+      ParameterConfig.new parameter_name, NoAccessorParameter
     end
 
     def reader(parameter_name)

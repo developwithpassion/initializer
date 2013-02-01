@@ -1,13 +1,15 @@
 require_relative '../proofs_init'
 
-title 'No Accessors Parameter' 
+title 'No Accessor Parameter' 
 
-module NoAccessorsParameter
+module NoAccessorParameter
   class SomeClass
-
+    # Accessors are added to this class
   end
-  class AParameter
-    include Initializer::NoAccessorsParameter
+
+  class SomeParameter
+    include Initializer::NoAccessorParameter
+
     def name
       :name
     end
@@ -28,11 +30,11 @@ module NoAccessorsParameter
 end
 
 def parameter
-  NoAccessorsParameter::AParameter.new
+  NoAccessorParameter::SomeParameter.new
 end
 
 heading 'Generating the attribute' do
   proof 'Does not add attributes to the target class' do
-    parameter.prove { does_not_generate_attrs?(::NoAccessorsParameter::SomeClass) }
+    parameter.prove { does_not_generate_attrs?(::NoAccessorParameter::SomeClass) }
   end
 end

@@ -1,19 +1,20 @@
 require_relative '../proofs_init'
 
-title 'Example - Inline Initializer With Default Modifiers Specified'
+heading 'Initializer With Default Visibility'
+
 =begin
 This example shows how to have a initializer generated using the simplest call mechanism available in the library
 =end
 
-module InlineInitializerWithDefaultModifiersSpecified
-  class Item
+module InitializerWithDefaultVisibility
+  class SomeClass
     include Initializer 
 
     initializer :name, rw(:age), :address, :visibility => :w
 
 =begin
   The above is equivalent to the following
-  class Item
+  class SomeClass
     attr_writer :name
     attr_accessor :age
     attr_writer :address
@@ -51,7 +52,7 @@ proof 'Initializer is generated with accessors' do
   age = 23
   address = 'Address'
 
-  item = InlineInitializerWithDefaultModifiersSpecified::Item.new(name, age, address)
+  obj = InitializerWithDefaultVisibility::SomeClass.new(name, age, address)
 
-  item.prove { initialized?(name, age, address) }
+  obj.prove { initialized?(name, age, address) }
 end

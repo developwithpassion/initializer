@@ -1,15 +1,16 @@
 require_relative '../proofs_init'
 
-title 'Example - Inline Simple Initializer Generation'
+heading 'Initializer Without Parameter Visibility'
+
 =begin
 This example shows how to have a initializer generated using the simplest call mechanism available in the library
 =end
 
-module InlineSimpleInitializerGeneration
-  class Item
+module InitializerWithoutParameterVisibility
+  class SomeClass
     include Initializer 
 
-    initializer :name,:age,:address
+    initializer :name, :age, :address
 
 =begin
   The above is the equivalent of the following
@@ -39,7 +40,6 @@ module InlineSimpleInitializerGeneration
         @address == address  &&
         readers?(:name, :age, :address) &&
         !writers?(:name, :age, :address)
-        
       end
     end
   end
@@ -50,9 +50,9 @@ proof 'Initializer is generated' do
   age = 23
   address = 'Some House'
 
-  item = InlineSimpleInitializerGeneration::Item.new(name, age, address)
+  obj = InitializerWithoutParameterVisibility::SomeClass.new(name, age, address)
 
-  item.prove { initialized?(name, age, address) }
+  obj.prove { initialized?(name, age, address) }
 end
 
 
