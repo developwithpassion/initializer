@@ -19,17 +19,50 @@ module Initializer
     end
 
     def assignment_statement
-      "#{variable_name} = #{name.to_s}"
+      "#{variable_name} = #{name}"
     end
 
     def parameter_name
-      "#{parameter_prefix}#{name.to_s}"
+      "#{parameter_prefix}#{name}"
     end
 
     def variable_name
-      "@#{name.to_s}"
+      "@#{name}"
     end
 
+    module Visibility
+      module Reader
+        def generate_attr(target)
+          name = self.name
+          target.instance_eval do
+            attr_reader name
+          end
+        end
+      end
+
+      module Writer
+        def generate_attr(target)
+          name = self.name
+          target.instance_eval do
+            attr_writer name
+          end
+        end
+      end
+
+      module Accessor
+        def generate_attr(target)
+          name = self.name
+          target.instance_eval do
+            attr_accessor name
+          end
+        end
+      end
+
+      module NoAccessor
+        def generate_attr(target)
+        end
+      end
+    end
   end
 end
 

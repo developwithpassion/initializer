@@ -4,32 +4,35 @@ title 'Reader Parameter'
 
 module ReaderParameter
   class SomeClass
-
   end
-  class AParameter
-    include Initializer::ReaderParameter
+
+  class SomeParameter
+    include Initializer::Parameter::Visibility::Reader
+
     def name
       :name
     end
 
     module Proof
-      def generates_attr_reader?(target)
-        original = target.new
-        had_no_reader = !original.respond_to?(:name)
-        generate_attr target
-        updated = target.new
-        had_no_reader && updated.respond_to?(:name)
+      def generates_attr_reader?
+        attr_defined?
+      end
+
+      def attr_defined?(name)
+        SomeClass.method_defined?(:name)
       end
     end
   end
 end
 
 def parameter
-  ::ReaderParameter::AParameter.new
+  parameter = ReaderParameter::SomeParameter.new
+  parameter.generate_attr ReaderParameter::SomeClass
+  parameter
 end
 
 heading 'Generating the attribute' do
-  proof 'Adds an attr_reader to its target class' do
-    parameter.prove { generates_attr_reader?(::ReaderParameter::SomeClass) }
+  proof 'Adds an attr_reader to the target class' do
+    parameter.prove { attr_defined? :name }
   end
 end

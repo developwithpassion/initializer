@@ -6,19 +6,19 @@ module Initializer
   module ClassMethods
     extend self
     def reader(parameter_name)
-      ParameterConfig.new parameter_name, ReaderParameter
+      Attribute.new parameter_name, Parameter::Visibility::Reader
     end
 
     def writer(parameter_name)
-      ParameterConfig.new parameter_name, WriterParameter
+      Attribute.new parameter_name, Parameter::Visibility::Writer
     end
 
     def accessor(parameter_name)
-      ParameterConfig.new parameter_name, AccessorParameter
+      Attribute.new parameter_name, Parameter::Visibility::Accessor
     end
 
     def no_accessor(parameter_name)
-      ParameterConfig.new parameter_name, NoAccessorParameter
+      Attribute.new parameter_name, Parameter::Visibility::NoAccessor
     end
 
     alias :r :reader
@@ -35,7 +35,6 @@ module Initializer
         parameters.pop
         default_visibility = last_arg[:visibility]
       end
-
 
       parameters.each do |parameter|
         parameter_configuration = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
