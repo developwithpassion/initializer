@@ -37,8 +37,8 @@ module Initializer
       end
 
       parameters.each do |parameter|
-        parameter_configuration = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
-        parameter_configuration.configure macro
+        attribute = parameter.is_a?(Symbol) ? send(default_visibility, parameter) : parameter
+        attribute.configure macro
       end
 
       macro.define_initializer
