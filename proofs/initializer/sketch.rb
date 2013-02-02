@@ -8,8 +8,7 @@ module Initializer
 
   module ClassMethods
     def initializer(*parameters)
-      macro = Macro.build self, parameters
-      macro.generate_definitions
+      Macro.generate_definitions self, parameters
     end
 
     def r(parameter_name)
@@ -58,11 +57,15 @@ module Initializer
 
     def self.build(target_class, parameters)
       parameters, options = separate_parameters(parameters)
-
       options.extend InitializerOptions
+      parameters = NormalizeParameters.normalize(parameters, options.visibility)
+      instance = new target_class, parameters
+      instance
+    end
 
-      normalize(parameters, options.visibility)
-      new target_class, parameters
+    def self.generate_definitions(target_class, parameters)
+      instance = build target_class, parameters
+      instance.generate_definitions
     end
 
     def self.separate_parameters(parameters)
@@ -79,20 +82,6 @@ module Initializer
       parameters.last.is_a? Hash
     end
 
-    def self.normalize(parameters, default_visibility)
-      parameters.map! do |p|
-        normalize_parameter(p, default_visibility)
-      end
-    end
-
-    def self.normalize_parameter(parameter, default_visibility)
-      if parameter.is_a? Symbol
-        return Parameter.new parameter, default_visibility
-      else
-        return parameter
-      end
-    end
-
     def generate_definitions
       define_attributes
       ## TODO define_initializer
@@ -102,6 +91,36 @@ module Initializer
     def define_attributes
       parameters.each do |p|
         Attribute.define target_class, p.name, p.visibility
+      end
+    end
+  end
+
+  class NormalizeParameters
+    attr_reader :parameters
+    attr_reader :default_visibility
+
+    def initialize(parameters, default_visibility)
+      @parameters = parameters
+      @default_visibility = default_visibility
+    end
+
+    def self.normalize(parameters, default_visibility)
+      instance = new parameters, default_visibility
+      instance.normalize
+      instance.parameters
+    end
+
+    def normalize
+      @parameters = parameters.map do |p|
+        normalize_parameter p
+      end
+    end
+
+    def normalize_parameter(parameter)
+      if parameter.is_a? Symbol
+        return Parameter.new parameter, default_visibility
+      else
+        return parameter
       end
     end
   end
