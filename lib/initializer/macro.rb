@@ -138,12 +138,14 @@ CTOR
     end
 
     def define_getter
+      name = self.name
       target_class.send :define_method, name do
         instance_variable_get("@#{name}")
       end
     end
 
     def define_setter
+      name = self.name
       target_class.send :define_method, "#{name}=" do |value|
         instance_variable_set("@#{name}", value)
       end

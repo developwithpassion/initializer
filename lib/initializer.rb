@@ -1,3 +1,3 @@
-require_relative 'initializer/macro'
-require_relative 'initializer/initializer'
+require 'initializer/macro'
+require 'initializer/initializer'
 
