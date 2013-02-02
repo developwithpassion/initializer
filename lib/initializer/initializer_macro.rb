@@ -2,13 +2,16 @@ module Initializer
   class InitializerMacro
     attr_reader :target_class
 
-    attr_reader :regular_parameters
+    attr_writer :regular_parameters
     attr_accessor :block_parameter
     attr_accessor :splat_parameter
 
     def initialize(target_class)
       @target_class = target_class
-      @regular_parameters = {}
+    end
+
+    def regular_parameters
+      @regular_parameters ||= {}
     end
 
     def add_regular_parameter(name)
@@ -17,14 +20,14 @@ module Initializer
       param
     end
 
-    def add_splat_param(name, &parameter_configuration_block)
+    def add_splat_param(name)
       raise 'An initializer can have only one splat parameter' unless splat_parameter.nil?
       param = Parameter.splat_parameter name
       self.splat_parameter = param
       param
     end
 
-    def add_block_param(name, &parameter_configuration_block)
+    def add_block_param(name)
       raise 'An initializer can have only one block parameter' unless block_parameter.nil?
       param = Parameter.block_parameter(name)
       self.block_parameter = param

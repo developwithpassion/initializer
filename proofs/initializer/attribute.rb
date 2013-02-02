@@ -2,48 +2,33 @@ require_relative '../proofs_init'
 
 title 'Attribute' 
 
-module Attribute
-  module VisibilityMixin
-    def hello
-
-    end
+module AttributeExamples
+  module SomeVisibility
   end
-  class SomeClass
 
+  class SomeTargetClass
   end
 end
+
 module Initializer
-  class Attribute
+  class Parameter
     module Proof
-
-      def configure_macro
-        macro= InitializerMacro.new ::Attribute::SomeClass
-        configure macro
-        macro
-      end
-
-      def added_parameter_to_initializer_macro?(name)
-        macro = configure_macro
-        macro.parameters.count == 1
-      end
-
-      def extended_parameter?
-        macro= configure_macro
-        macro.parameters[0].is_a? ::Attribute::VisibilityMixin
+      def extended?
+        self.is_a? ::AttributeExamples::SomeVisibility
       end
     end
   end
 end
 
-def config
-  config = Initializer::Attribute.new(:name, Attribute::VisibilityMixin)
-  config
+def attribute
+  attribute = Initializer::Attribute.new(:some_parameter_name, AttributeExamples::SomeVisibility)
+  attribute
 end
 
 heading 'Configuring an initializer macro'
+
 proof 'Adds a new parameter to the initialization macro' do
-  config.prove { added_parameter_to_initializer_macro? :name }
-end
-proof 'Extends the parameter added to the initialization macro with a visibility mixin' do
-  config.prove { extended_parameter? }
+  macro = Initializer::InitializerMacro.new ::AttributeExamples::SomeTargetClass
+  parameter = attribute.configure macro
+  parameter.prove { extended? }
 end

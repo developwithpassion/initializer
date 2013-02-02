@@ -8,6 +8,7 @@ module Initializer
       @visibility_extension = visibility_extension
     end
 
+    ## Adds visibility to parameter, making it an "attribute"
     def configure(macro)
       param = macro.add_regular_parameter parameter_name
       param.extend visibility_extension
