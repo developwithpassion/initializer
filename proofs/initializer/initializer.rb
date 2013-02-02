@@ -1,36 +1,41 @@
-require_relative '../proofs_init'
+require 'test/unit/assertions'
+include Test::Unit::Assertions
 
-title 'Initializer Module'
+
+# require_relative '../proofs_init.rb'
+require_relative '../../lib/initializer.rb'
 
 
-module InitializerModule
-  class SomeClass
-    include Initializer
+class SomeTargetClass
+  include Initializer
 
-    initializer :name, :age, :address
-
-    module Proof
-      def generated?(name, age, address)
-        @name == name && 
-          @age == age &&
-          @address == address
-      end
-    end
-  end
-
-  class ClassMethodHarness
-    include ::Initializer::ClassMethods
-  end
+  initializer :foo, a(:bar), w(:baz), na(:qux), r(:fred)
 end
 
-heading 'The initializer macro style method' do
-  proof 'Generates the initializer with the specified args and variable initialization' do
-    name = 'John'
-    age = '33'
-    address = 'Some House'
+something = SomeTargetClass.new(1,2,3,4,5)
 
-    item = InitializerModule::SomeClass.new(name, age, address)
+assert something.respond_to?(:foo), "Has getter"
+assert !something.respond_to?(:foo=), "Has setter"
 
-    item.prove { generated?(name, age, address) }
-  end
+assert something.respond_to?(:bar), "Has getter"
+assert something.respond_to?(:bar=), "Has setter"
+
+assert !something.respond_to?(:baz), "Has getter"
+assert something.respond_to?(:baz=), "Has setter"
+
+assert !something.respond_to?(:qux), "Has getter"
+assert !something.respond_to?(:qux=), "Has setter"
+
+assert something.respond_to?(:fred), "Has getter"
+assert !something.respond_to?(:fred=), "Has setter"
+
+class SomeTargetClassWithDefaultVisibility
+  include Initializer
+
+  initializer :foo, :default => :accessor
 end
+
+something = SomeTargetClassWithDefaultVisibility.new(1)
+
+assert something.respond_to?(:foo), "Has getter"
+assert something.respond_to?(:foo=), "Has setter"
