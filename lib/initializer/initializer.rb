@@ -29,9 +29,9 @@ module Initializer
 
     def initializer(*parameters)
       macro = InitializerMacro.new(self)
-      last_arg = parameters.last
       default_visibility = :reader
-
+      
+      last_arg = parameters.last
       if last_arg.is_a? Hash 
         parameters.pop
         default_visibility = last_arg[:visibility]
