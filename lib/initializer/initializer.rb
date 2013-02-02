@@ -5,9 +5,11 @@ module Initializer
 
   module ClassMethods
     extend self
-    def initializer(*parameters)
+
+    def initializer_macro(*parameters)
       Macro.generate_definitions self, parameters
     end
+    alias :initializer :initializer_macro
 
     def r(parameter_name)
       return Parameter.new(parameter_name, :reader)

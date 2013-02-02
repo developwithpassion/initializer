@@ -1,13 +1,10 @@
 require_relative '../proofs_init'
 
-title 'Initializer parameter creation macro style methods'
+title 'Parameter'
 
 module Initializer
   class Parameter
     module Proof
-      def named?(name)
-        self.name == name
-      end
       def visibility?(visibility)
         self.visibility == visibility
       end
@@ -27,35 +24,37 @@ module Initializer
   end
 end
 
-def parameter_macro_style
+def visibility
   ::Initializer::ClassMethods
 end
 
 name = :address
 
-heading 'Creating parameters' do
-  proof 'Creates a read parameter' do
-    parameter = parameter_macro_style.r name
+heading 'Creating parameters with visibility' do
+
+  proof 'Create a read parameter' do
+    parameter = visibility.r name
+
     parameter.prove { reader_visibility? }
-    parameter.prove { named? name }
   end
 
-  proof 'Creates a write parameter' do
-    parameter = parameter_macro_style.w name
+  proof 'Create a write parameter' do
+    parameter = visibility.w name
+
     parameter.prove { writer_visibility? }
-    parameter.prove { named? name }
   end
 
-  proof 'Creates a accessor parameter' do
-    parameter = parameter_macro_style.a name
+  proof 'Create a accessor parameter' do
+    parameter = visibility.a name
+
     parameter.prove { accessor_visibility? }
-    parameter.prove { named? name }
   end
 
-  proof 'Creates a no accessor parameter' do
-    parameter = parameter_macro_style.na name
+  proof 'Create a no accessor parameter' do
+    parameter = visibility.na name
+
     parameter.prove { no_accessor_visibility? }
-    parameter.prove { named? name }
   end
 end
+
 
