@@ -4,6 +4,7 @@ module Initializer
   end
 
   module ClassMethods
+    extend self
     def initializer(*parameters)
       Macro.generate_definitions self, parameters
     end
