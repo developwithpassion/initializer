@@ -1,8 +1,10 @@
 require_relative 'proofs_init'
 
-load 'initializer/parameters.rb'
-load 'initializer/initializer_with_parameter_visibility.rb'
-load 'initializer/initializer_without_visibility.rb'
-load 'initializer/initializer_with_default_visibility.rb'
 load 'initializer/attribute.rb'
+load 'initializer/default_visibility.rb'
+load 'initializer/initializer.rb'
+load 'initializer/parameter_visibility.rb'
+load 'initializer/parameters.rb'
+load 'initializer/without_visibility.rb'
+
 load 'demos.rb'
