@@ -50,13 +50,13 @@ heading 'Without visibility' do
     item.prove { read?(:age) && write?(:age) }
   end
 
-  proof 'Write parameter creates a attribute writer' do
+  proof 'Write parameter creates a writer attribute' do
     item = create_item.call
 
     item.prove { write?(:address) && !read?(:address) }
   end
 
-  proof 'No Accessor parameter creates a attribute with no accessors' do
+  proof 'No Accessor parameter creates a no accessors attribute' do
     item = create_item.call
 
     item.prove { !write?(:city) && !read?(:city) }

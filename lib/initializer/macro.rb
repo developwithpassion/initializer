@@ -106,16 +106,6 @@ CTOR
     end
   end
 
-  class Parameter
-    attr_reader :name    
-    attr_reader :visibility    
-
-    def initialize(name, visibility)
-      @name = name
-      @visibility = visibility
-    end
-  end
-
   class Attribute
     attr_reader :target_class
     attr_reader :name
@@ -145,7 +135,7 @@ CTOR
     end
 
     def define_setter
-      name = self.name
+      # name = self.name
       target_class.send :define_method, "#{name}=" do |value|
         instance_variable_set("@#{name}", value)
       end
