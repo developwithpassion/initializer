@@ -2,7 +2,7 @@ require_relative '../proofs_init'
 
 title 'Initializer With Parameter Visibility'
 
-module ParameterVisibility
+module ParameterVisibilityProofs
   class Example
     include Initializer
 
@@ -20,7 +20,7 @@ module ParameterVisibility
 end
 
 def example
-  ParameterVisibility::Example.new(:some_value, :some_value, :some_value, :some_value)
+  ParameterVisibilityProofs::Example.new(:some_value, :some_value, :some_value, :some_value)
 end
 
 proof 'Read parameter creates an attribute reader' do
