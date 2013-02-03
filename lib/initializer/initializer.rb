@@ -22,6 +22,7 @@ module Initializer
     def a(parameter_name)
       return Parameter.new(parameter_name, :accessor)
     end
+    alias :rw :a
 
     def na(parameter_name)
       return Parameter.new(parameter_name, :no_accessor)

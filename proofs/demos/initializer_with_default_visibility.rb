@@ -10,7 +10,7 @@ module InitializerWithDefaultVisibility
   class SomeClass
     include Initializer 
 
-    initializer :name, rw(:age), :address, :visibility => :w
+    initializer :name, rw(:age), :address, :default => :writer
 
 =begin
   The above is equivalent to the following

@@ -54,3 +54,30 @@ heading 'No Accessor Attribute' do
   end
 end
 
+
+heading 'The write method that it generates' do
+  proof 'Can modify the value of its associated variable' do
+    target_class = Attribute.some_class
+
+    attribute = define_attribute(target_class, name, :writer)
+
+    instance = target_class.new
+    instance.age = 'some_age'
+    instance.prove { @age == 'some_age' }
+  end
+end
+
+heading 'The read method that it generates' do
+  proof 'Can read the value of its associated variable' do
+    target_class = Attribute.some_class
+
+    attribute = define_attribute(target_class, name, :reader)
+
+    instance = target_class.new
+    instance.instance_eval do
+      @age = 'some_age'
+    end
+    instance.prove { age == 'some_age' }
+  end
+end
+

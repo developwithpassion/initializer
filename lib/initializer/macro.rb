@@ -135,7 +135,7 @@ CTOR
     end
 
     def define_setter
-      # name = self.name
+      name = self.name
       target_class.send :define_method, "#{name}=" do |value|
         instance_variable_set("@#{name}", value)
       end
