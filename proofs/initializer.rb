@@ -1,6 +1,5 @@
 require_relative 'proofs_init'
 
-load 'initializer/initializer.rb'
 load 'initializer/parameters.rb'
 load 'initializer/initializer_with_parameter_visibility.rb'
 load 'initializer/initializer_without_visibility.rb'
