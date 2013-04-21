@@ -32,6 +32,11 @@ class SomeItem
   end
 end
 ```
+
+## Demonstrations
+
+See demonstration code at: https://github.com/Sans/initializer/tree/master/proofs/demos
+
 ## TODO
 
 Document the attribute visibility syntax
