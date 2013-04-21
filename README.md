@@ -1,26 +1,17 @@
-initializer
-======
+# Initializer
 
-`initializer` gem enables a simple declaritive initializer model
+The `initializer` library defines initializers that receive parameters and assign to attributes. It also defines the attributes, allowing the attribute visibility to be declared as well.
 
-## Installation
+## Status
 
-Install the gem itself.
+**Unreleased**
 
-    [PROJECTS]$ git clone ssh://git@$REPOSITORY_PATH/initializer.git
-    [PROJECTS]$ cd initializer
-    [PROJECTS/initializer]$ gem install bundler
-    [PROJECTS/initializer]$ gem install path_gem
-    [PROJECTS/initializer]$ bundle
-
-Make the gem available for `path-gem`.
-
-    cd $PATH_GEM_DIR
-    [PATH_GEM_DIR]$ ln -s $PROJECTS/initializer initializer
+NOTE: Dependencies are linked locally in the development environment via the [`path_gem` library](https://github.com/Sans/path-gem). Dependencies aren't installed by RubyGems, and some dependencies aren't yet published.
 
 ## Usage
 
-### include initializer and use the initialize_with macro to define the ctor and automatic initializer
+Include initializer and use the initializer macro to define the initializer method and attributes.
+
 ```ruby
 class SomeItem
   include initializer
@@ -29,13 +20,22 @@ class SomeItem
 end
 ```
 
-The above usage would be the equivalent of :
+The above usage would be the equivalent of:
+
 ```ruby
 class SomeItem
- def initialize(name, age, address)
+  attr_accessor :name, :age, :address
+  def initialize(name, age, address)
     @name = name
     @age = age
     @address = address
- end
+  end
 end
 ```
+## TODO
+
+Document the attribute visibility syntax
+
+## License
+
+Initializer is released under the [MIT License](http://www.opensource.org/licenses/MIT).
