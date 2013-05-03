@@ -51,8 +51,8 @@ module Initializer
       return Parameter.build(parameter_name, :no_accessor, default)
     end
 
-    def statement(code_fragment)
-      Statement.new(code_fragment)
+    def statement(statement)
+      Statement.new(statement)
     end
   end
 
