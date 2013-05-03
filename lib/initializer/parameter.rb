@@ -25,10 +25,10 @@ module Initializer
       result = value
 
       unless result.respond_to?(:code_fragment)
-        if result.is_a?(String) || result.is_a?(Symbol)
-          result = StringDefaultValue.new(value.to_s)
+        if [String, Symbol].include?(result.class)
+          result = StringDefaultValue.new(result.to_s)
         else
-          result = Statement.new(value)
+          result = Statement.new(result)
         end
       end
       result
