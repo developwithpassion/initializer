@@ -11,7 +11,7 @@ module Initializer
     end
 
     def code_fragment
-      "#{@value}"
+      return @value
     end
   end
 
