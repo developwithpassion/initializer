@@ -25,8 +25,8 @@ module Initializer
       result = value
 
       unless result.respond_to?(:code_fragment)
-        if result.is_a?(String)
-          result = StringDefaultValue.new(value)
+        if result.is_a?(String) || result.is_a?(Symbol)
+          result = StringDefaultValue.new(value.to_s)
         else
           result = Statement.new(value)
         end

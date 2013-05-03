@@ -10,7 +10,7 @@ module InitializerWithDefaultValues
   class SomeClass
     include Initializer 
 
-    initializer w(:name, 'JP Boodhoo'), rw(:age, 23), rw(:address, 'Address'), rw(:other, statement('DateTime.now'))
+    initializer w(:name, 'JP Boodhoo'), rw(:age, 23), rw(:address, 'Address'), rw(:other, statement('DateTime.now')), r(:symbol, :hello)
 
 =begin
   The above is equivalent to the following
