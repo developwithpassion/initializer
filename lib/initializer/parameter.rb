@@ -14,11 +14,9 @@ module Initializer
     end
 
     def argument_definition
-      if @default
-        return "#{@name} = #{default.code_fragment}"
-      else
-        return @name
-      end
+      return "#{@name} = #{default.code_fragment}" if @default
+
+      return @name
     end
 
     def self.build_default_value(value)
@@ -43,6 +41,16 @@ module Initializer
       end
 
       instance
+    end
+
+    class StringDefaultValue
+      def initialize(value)
+        @value = value
+      end
+
+      def code_fragment
+        "'#{@value}'"
+      end
     end
   end
 end
