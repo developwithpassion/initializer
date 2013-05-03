@@ -1,5 +1,5 @@
 module Initializer
-  NO_DEFAULT_VALUE_ALLOWED = Object.new
+  NO_DEFAULT_VALUE = Object.new
 
   def self.included(base)
     base.extend ClassMethods
@@ -34,20 +34,20 @@ module Initializer
     end
     alias :initializer :initializer_macro
 
-    def r(parameter_name, default = NO_DEFAULT_VALUE_ALLOWED)
+    def r(parameter_name, default = NO_DEFAULT_VALUE)
       return Parameter.build(parameter_name, :reader, default)
     end
 
-    def w(parameter_name, default = NO_DEFAULT_VALUE_ALLOWED)
+    def w(parameter_name, default = NO_DEFAULT_VALUE)
       return Parameter.build(parameter_name, :writer, default)
     end
 
-    def a(parameter_name, default = NO_DEFAULT_VALUE_ALLOWED)
+    def a(parameter_name, default = NO_DEFAULT_VALUE)
       return Parameter.build(parameter_name, :accessor, default)
     end
     alias :rw :a
 
-    def na(parameter_name, default = NO_DEFAULT_VALUE_ALLOWED)
+    def na(parameter_name, default = NO_DEFAULT_VALUE)
       return Parameter.build(parameter_name, :no_accessor, default)
     end
 

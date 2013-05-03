@@ -37,7 +37,7 @@ module Initializer
     def self.build(name, visibility, default)
       instance = new(name, visibility)
 
-      unless default.eql?(NO_DEFAULT_VALUE_ALLOWED)
+      unless default.eql?(NO_DEFAULT_VALUE)
         default = build_default_value(default)
         instance.default_value(default)
       end
