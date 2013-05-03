@@ -15,7 +15,7 @@ module Initializer
     end
   end
 
-  class StringValue
+  class StringDefaultValue
     def initialize(value)
       @value = value
     end

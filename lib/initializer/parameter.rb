@@ -14,10 +14,10 @@ module Initializer
     end
 
     def argument_definition
-      unless @default
-        return @name
-      else
+      if @default
         return "#{@name} = #{default.code_fragment}"
+      else
+        return @name
       end
     end
 
@@ -26,7 +26,7 @@ module Initializer
 
       unless result.respond_to?(:code_fragment)
         if result.is_a?(String)
-          result = StringValue.new(value)
+          result = StringDefaultValue.new(value)
         else
           result = Statement.new(value)
         end
@@ -34,7 +34,7 @@ module Initializer
       result
     end
 
-    def self.build(name, visibility, default)
+    def self.build(name, visibility, default = NO_DEFAULT_VALUE)
       instance = new(name, visibility)
 
       unless default.eql?(NO_DEFAULT_VALUE)
