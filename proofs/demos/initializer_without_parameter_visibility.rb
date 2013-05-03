@@ -3,7 +3,7 @@ require_relative '../proofs_init'
 heading 'Initializer Without Parameter Visibility'
 
 =begin
-This example shows how to have a initializer generated using the simplest call mechanism available in the library
+This example shows how to use initializer to generate a ctor that defaults alls ctor parameters to readable attributes on the instance
 =end
 
 module InitializerWithoutParameterVisibility

@@ -3,7 +3,7 @@ require_relative '../proofs_init'
 heading 'Initializer With Default Values'
 
 =begin
-This example shows how to have a initializer generated using the simplest call mechanism available in the library
+This example shows how to use initializer to generate a ctor that includes default values for ctor parameters
 =end
 
 module InitializerWithDefaultValues
