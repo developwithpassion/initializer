@@ -10,7 +10,7 @@ module InitializerWithDefaultValues
   class SomeClass
     include Initializer 
 
-    initializer w(:name, 'JP Boodhoo'), rw(:age, 23), rw(:address, 'Address'), rw(:other, statement('DateTime.now')), r(:symbol, :hello)
+    initializer w(:name, 'JP Boodhoo'), rw(:age, 23), rw(:address, 'Address'), rw(:a_statement, statement('DateTime.now')), r(:a_symbol, :hello)
 
 =begin
   The above is equivalent to the following
@@ -19,11 +19,12 @@ module InitializerWithDefaultValues
     attr_accessor :age
     attr_writer :address
 
-    def initialize(name='JP Boodhoo', age=23, address='Address', other=DateTime.now)
+    def initialize(name='JP Boodhoo', age=23, address='Address', a_statement=DateTime.now, symbol='hello')
       @name = name
       @age = age
       @address = address
-      @other = other
+      @a_statement = a_statement
+      @a_symbol = a_symbol
     end
   end
 =end
@@ -38,7 +39,9 @@ module InitializerWithDefaultValues
       def initialized?(name, age, address)
         @name == name &&
         @age == age &&
-        @address == address
+        @address == address &&
+        @a_statement.is_a?(DateTime) &&
+        @a_symbol == 'hello'
       end
     end
   end
