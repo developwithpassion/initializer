@@ -68,14 +68,14 @@ module Initializer
       end
 
       def variable_assignment_statements
-        variable_assignments = parameters.inject("") do|assignments, parameter|
+        variable_assignments = parameters.inject("") do |assignments, parameter|
           "#{assignments}#{parameter.assignment_statement}\n"
         end
         variable_assignments
       end
 
       def parameter_definitions
-        parameter_names = parameters.map{|item| item.argument_definition }.to_a
+        parameter_names = parameters.map{ |item| item.argument_definition }.to_a
         parameter_names = parameter_names.join(", ")
         parameter_names
       end
@@ -100,6 +100,7 @@ CTOR
       end
     end
   end
+  
   module InitializerOptions
     def visibility
       self[:default]

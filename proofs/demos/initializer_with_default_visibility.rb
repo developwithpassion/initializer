@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-heading 'Initializer With Default Visibility'
+title 'Initializer With Default Visibility'
 
 =begin
 This example shows how to use initializer to generate a ctor that specifies default visibility for ctor parameters that don't have visibility explicitly stated

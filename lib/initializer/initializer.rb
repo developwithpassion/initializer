@@ -51,7 +51,7 @@ module Initializer
       return Parameter.build(parameter_name, :no_accessor, default)
     end
 
-    def statement(statement)
+    def run(statement)
       Statement.new(statement)
     end
   end

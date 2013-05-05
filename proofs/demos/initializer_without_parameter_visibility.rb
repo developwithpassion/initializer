@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-heading 'Initializer Without Parameter Visibility'
+title 'Initializer Without Parameter Visibility'
 
 =begin
 This example shows how to use initializer to generate a ctor that defaults alls ctor parameters to readable attributes on the instance

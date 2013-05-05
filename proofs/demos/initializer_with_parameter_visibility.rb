@@ -1,6 +1,6 @@
 require_relative '../proofs_init'
 
-heading 'Initializer With Parameter Visibility'
+title 'Initializer With Parameter Visibility'
 
 =begin
 This example shows how to use initializer to generate a ctor that specifies attribute visibility for the ctor parameters
