@@ -15,16 +15,6 @@ module Initializer
     end
   end
 
-  class StringDefaultValue
-    def initialize(value)
-      @value = value
-    end
-
-    def code_fragment
-      "'#{@value}'"
-    end
-  end
-
   module ClassMethods
     extend self
     
