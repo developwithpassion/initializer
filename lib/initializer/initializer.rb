@@ -18,7 +18,6 @@ module Initializer
   module ClassMethods
     extend self
     
-
     def initializer_macro(*parameters)
       Macro.generate_definitions self, parameters
     end
@@ -41,9 +40,8 @@ module Initializer
       return Parameter.build(parameter_name, :no_accessor, default)
     end
 
-    def run(statement)
+    def deferred(statement)
       Statement.new(statement)
     end
   end
-
 end
