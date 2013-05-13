@@ -6,12 +6,10 @@ module Initializer
   end
 
   class Statement
-    def initialize(value)
-      @value = value
-    end
+    attr_reader :code_fragment
 
-    def code_fragment
-      return @value
+    def initialize(code_fragment)
+      @code_fragment = code_fragment
     end
   end
 
