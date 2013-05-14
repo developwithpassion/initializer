@@ -22,4 +22,6 @@ doc/
 *scratch.*
 
 .rvmrc
+.ruby-gemset
+.ruby-version
 Gemfile.lock
