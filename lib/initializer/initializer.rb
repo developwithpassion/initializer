@@ -2,7 +2,7 @@ module Initializer
   NO_DEFAULT_VALUE = Object.new
 
   def self.included(base)
-    base.extend ClassMethods
+    Extension.! base, ClassMethods
   end
 
   class Statement

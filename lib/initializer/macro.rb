@@ -12,7 +12,7 @@ module Initializer
 
     def self.build(target_class, parameters)
       parameters, options = separate_parameters(parameters)
-      options.extend InitializerOptions
+      Extension.! options, InitializerOptions
       parameters = NormalizeParameters.normalize(parameters, options.visibility)
       instance = new target_class, parameters
       instance
@@ -56,7 +56,7 @@ module Initializer
 
       def self.define_initializer(target_class, parameters)
         parameters = parameters.map do |parameter|
-          parameter.extend InitializerParameter
+          Extension.! parameter, InitializerParameter
         end
         instance = new target_class, parameters
         instance.define_initializer
