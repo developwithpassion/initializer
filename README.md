@@ -2,11 +2,7 @@
 
 The `initializer` library defines initializers that receive parameters and assign to attributes. It also defines the attributes, allowing the attribute visibility to be declared as well.
 
-## Status
-
-**Unreleased**
-
-NOTE: Dependencies are linked locally in the development environment via the [`path_gem` library](https://github.com/Sans/path-gem). Dependencies aren't installed by RubyGems, and some dependencies aren't yet published.
+NOTE: Dependencies are linked locally in the development environment via the [`path_gem` library](https://github.com/Sans/path-gem). Development dependencies aren't installed by RubyGems.
 
 ## Usage
 
@@ -25,6 +21,7 @@ The above usage would be the equivalent of:
 ```ruby
 class SomeItem
   attr_accessor :name, :age, :address
+
   def initialize(name, age, address)
     @name = name
     @age = age
@@ -39,7 +36,7 @@ See demonstration code at: https://github.com/Sans/initializer/tree/master/proof
 
 ## TODO
 
-Document the attribute visibility syntax
+Document the attribute visibility syntax and the default value syntax
 
 ## License
 
