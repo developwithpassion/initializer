@@ -1,9 +1,14 @@
-require 'path_gem'
-
 source 'https://rubygems.org'
 
-path_gem 'proof', :prefix => 'TOOL'
-path_gem 'single', :prefix => 'TOOL'
-path_gem 'setter', :prefix => 'TOOL'
-path_gem 'output', :prefix => 'TOOL'
-path_gem 'extension', :prefix => 'TOOL'
+# Note: You'll need to install the path_gem gem before you can run Bundler
+# Path gem allows the location of gems to be swapped (eg: local on your file
+# system, or remote on rubygems.org) based on environment variables.
+require 'path_gem'
+
+gem 'extension'
+
+# For development
+path_gem 'proof'
+path_gem 'single'
+path_gem 'setter'
+path_gem 'output'
