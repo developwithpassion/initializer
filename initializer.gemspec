@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'initializer'
   s.summary = 'Initializer Library'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.authors = ['The Sans Collective']
   s.homepage = 'https://github.com/Sans/initializer'
   s.require_paths = ['lib']
