@@ -40,4 +40,4 @@ Document the attribute visibility syntax and the default value syntax
 
 ## License
 
-Initializer is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+Initializer is released under the [MIT License](https://github.com/Sans/initializer/blob/master/MIT-license.txt).
