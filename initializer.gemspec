@@ -3,6 +3,7 @@ Gem::Specification.new do |s|
   s.summary = 'Initializer Library'
   s.version = '0.0.2'
   s.authors = ['The Sans Collective']
+  s.license = 'MIT'
   s.homepage = 'https://github.com/Sans/initializer'
   s.require_paths = ['lib']
   s.files = Dir.glob('{lib}/**/*')
